@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="github.chenlei.springbootscalademo.dao.UserOperationHistoryMapper" >
+  <resultMap id="BaseResultMap" type="github.chenlei.springbootscalademo.entity.UserOperationHistory" >
+    <id column="ID" property="id" jdbcType="OTHER" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="OPERATION_TYPE" property="operationType" jdbcType="VARCHAR" />
+    <result column="OPERATE_TIME" property="operateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, USERNAME, OPERATION_TYPE, OPERATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >
+    select 
+    <include refid="Base_Column_List" />
+    from USER_OPERATION_HISTORY
+    where ID = #{id,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >
+    delete from USER_OPERATION_HISTORY
+    where ID = #{id,jdbcType=OTHER}
+  </delete>
+  <insert id="insert" parameterType="github.chenlei.springbootscalademo.entity.UserOperationHistory" >
+    insert into USER_OPERATION_HISTORY (ID, USER_ID, USERNAME, 
+      OPERATION_TYPE, OPERATE_TIME)
+    values (#{id,jdbcType=OTHER}, #{userId,jdbcType=OTHER}, #{username,jdbcType=OTHER}, 
+      #{operationType,jdbcType=OTHER}, #{operateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="github.chenlei.springbootscalademo.entity.UserOperationHistory" >
+    insert into USER_OPERATION_HISTORY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="operationType != null" >
+        OPERATION_TYPE,
+      </if>
+      <if test="operateTime != null" >
+        OPERATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=OTHER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=OTHER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=OTHER},
+      </if>
+      <if test="operationType != null" >
+        #{operationType,jdbcType=OTHER},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="github.chenlei.springbootscalademo.entity.UserOperationHistory" >
+    update USER_OPERATION_HISTORY
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=OTHER},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=OTHER},
+      </if>
+      <if test="operationType != null" >
+        OPERATION_TYPE = #{operationType,jdbcType=OTHER},
+      </if>
+      <if test="operateTime != null" >
+        OPERATE_TIME = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="github.chenlei.springbootscalademo.entity.UserOperationHistory" >
+    update USER_OPERATION_HISTORY
+    set USER_ID = #{userId,jdbcType=OTHER},
+      USERNAME = #{username,jdbcType=OTHER},
+      OPERATION_TYPE = #{operationType,jdbcType=OTHER},
+      OPERATE_TIME = #{operateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=OTHER}
+  </update>
+</mapper>
